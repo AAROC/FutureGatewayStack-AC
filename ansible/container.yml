@@ -15,18 +15,10 @@ services:
       volumes:
         - /var/lib/mysql
 
-  # Add your containers here, specifying the base image you want to build from
-  # For example:
-  #
-  # web:
-  #   image: ubuntu:trusty
-  #   ports:
-  #     - "80:80"
-  #   command: ['/usr/bin/dumb-init', '/usr/sbin/apache2ctl', '-D', 'FOREGROUND']
-  #   dev_overrides:
-  #     environment:
-  #       - "DEBUG=1"
-  #
+    fgapiserver:
+      image: ubuntu:16.04
+      command: ['/bin/sh','-c','while true; do sleep 1000 ; done']
+
 registries:
 
   # Add optional registries used for deployment. For example:

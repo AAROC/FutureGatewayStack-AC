@@ -11,15 +11,19 @@
     - name: Install python
       raw: which python || apt-get -y update && apt-get install -y python
 
-
 - hosts: db
   tasks:
+    - name: Pull in vars
+      include_vars:
+        file: vars-fg-stack.yml
+        name: stack
     - name: Ensure prerequisites are installed
       package:
         name: "{{ item }}"
         state: present
       with_items:
         - git
+        - python-mysqldb
 
     - name: Get the source for the db setup
       git:
