@@ -2,6 +2,14 @@
 
 Ansible-Container playbooks for the [FutureGateway](https://github.com/FutureGateway).
 
+# Variables
+
+There are two variable files in `ansible` :
+
+  * `vars.yml` : variables used in templating the container orchestration
+  * `vars-fg-stack.yml` : variables used by the `main.yml` playbook which is run by ansible-container.
+
+The former is used to template the containter orchestration and should contain variables related only to the deployment. For the deployment and configuration of the services, see the latter. This is loaded int the `stack` variable. 
 
 # Containers and volumes
 
