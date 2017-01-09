@@ -5,5 +5,23 @@
 # For many examples of roles, check out Ansible Galaxy: https://galaxy.ansible.com/
 #
 ---
-- hosts: all
+- hosts: all,!db-data-container
   gather_facts: false
+  tasks:
+    - name: Install python
+      raw: which python || apt-get -y update && apt-get install -y python
+
+
+- hosts: db
+  tasks:
+    - name: Ensure prerequisites are installed
+      package:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - git
+
+    - name: Get the source for the db setup
+      git:
+        repo: https://github.com/indigo-dc/fgapiserver
+        dest: "{{ lookup('env','HOME') }}/fgapiserver"

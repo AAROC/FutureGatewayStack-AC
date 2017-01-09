@@ -5,7 +5,7 @@ services:
       ports:
         - "3306:3306"
       environment:
-        - MYSQL_ROOT_PASSWORD=changeme
+        - MYSQL_ROOT_PASSWORD="{{ mysql_root_pass }}"
       volumes_from:
         - db-data-container
 
