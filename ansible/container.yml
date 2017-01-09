@@ -1,0 +1,41 @@
+version: "2"
+services:
+    db:
+      image: mysql
+      ports:
+        - "3306:3306"
+      environment:
+        - MYSQL_ROOT_PASSWORD=changeme
+      volumes_from:
+        - db-data-container
+
+    db-data-container:
+      image: alpine
+      command: ['/bin/sh','-c','while true; do sleep 1000 ; done']
+      volumes:
+        - /var/lib/mysql
+
+  # Add your containers here, specifying the base image you want to build from
+  # For example:
+  #
+  # web:
+  #   image: ubuntu:trusty
+  #   ports:
+  #     - "80:80"
+  #   command: ['/usr/bin/dumb-init', '/usr/sbin/apache2ctl', '-D', 'FOREGROUND']
+  #   dev_overrides:
+  #     environment:
+  #       - "DEBUG=1"
+  #
+registries:
+
+  # Add optional registries used for deployment. For example:
+  #  google:
+  #    url: https://gcr.io
+  #    namespace: my-cool-project-xxxxxx
+  docker:
+    url: https://hub.docker.com
+    namespace: /u/aaroc
+  quay:
+    url: https://quay.io
+    namespace: aaroc
